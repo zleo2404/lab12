@@ -3,7 +3,7 @@ package it.unibo.es1;
 public class Test {
 	
 	/*
-	 * Scopo di questo esercizio è realizzare una GUI con l'aspetto mostrato nell'immagine gui.png fornita (N=4), attraverso
+	 * Scopo di questo esercizio è realizzare una GUI con l'aspetto mostrato nell'immagine test/resources/gui.png fornita (N=4), attraverso
 	 * il completamento della classe GUI fornita (il cui costruttore prenda il numero N dei pulsanti, tranne Print) da
 	 * visualizzare. I pulsanti hanno indicazione iniziale 0.
 	 * Alla pressione di un pulsante questo passa a 1, poi ripremendolo a 2, poi a 3 e così via. Arrivato a N il
