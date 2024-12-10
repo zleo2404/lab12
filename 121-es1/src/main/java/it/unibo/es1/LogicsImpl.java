@@ -1,46 +1,83 @@
 package it.unibo.es1;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+ 
 
 public class LogicsImpl implements Logics {
 
+	private class ButtonImpl {
+
+		private final int index;
+		private int value;
+		private boolean enabled = true;
+
+		public ButtonImpl(int index,int value){
+			this.index=index;
+			this.value=value;
+		}
+
+		public int getValue() {
+			return value;
+		}
+
+		public boolean isEnabled() {
+			return enabled;
+		}
+
+		public void setValue(){
+			this.value++;
+		}
+
+		public void setFalse(){
+			this.enabled=false;
+		}
+
+	}
+
+	private final int size;
+	private List<ButtonImpl> list = new ArrayList<>();
+
 	public LogicsImpl(int size) {
-		//TODO Auto-generated constructor stub
+		this.size = size;
+		for(int i=0;i<this.size;i++){
+			list.add(new ButtonImpl(i, 0));
+		}
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'size'");
+		return this.size;
 	}
 
 	@Override
 	public List<Integer> values() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'values'");
+		return list.stream().map(v -> v.getValue()).toList();
 	}
 
 	@Override
 	public List<Boolean> enablings() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'enablings'");
+		return list.stream().map(v -> v.isEnabled()).toList();
 	}
 
 	@Override
 	public int hit(int elem) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'hit'");
+		list.get(elem).setValue();
+		if(list.get(elem).getValue()==size){
+			list.get(elem).setFalse();
+		}
+		return list.get(elem).getValue();
 	}
 
 	@Override
 	public String result() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'result'");
+		return list.stream().map(v-> String.valueOf(v.getValue())).collect(Collectors.joining("|","<<",">>"));
 	}
 
 	@Override
 	public boolean toQuit() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'toQuit'");
+		return list.stream().allMatch( v -> v.getValue() == list.get(0).getValue());
 	}
 }
