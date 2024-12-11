@@ -22,8 +22,8 @@ public class GUI extends JFrame {
             final JButton buttonClicked = (JButton)e.getSource();
             final Pair<Integer,Integer> buttonPosition = buttons.get(buttonClicked);
             buttonClicked.setText(logics.hit(buttonPosition)?"*":""); // here call the logic to know what to show!
-            if (buttonPosition.equals(new Pair<>(0,0))){ // here call the logic instead, to know if should exit!
-                //System.exit(1);
+            if (logics.toQuit()){ // here call the logic instead, to know if should exit!
+                System.exit(1);
             } 
         };
                 

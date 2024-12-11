@@ -21,13 +21,13 @@ public class LogicsImpl implements Logics{
     @Override
     public boolean hit(Pair<Integer, Integer> x) {
         
-        if ( matrix.get(x.getY()).get(x.getX()) == true){
-            matrix.get(x.getY()).set(x.getX(),false);
+        if ( matrix.get(x.getX()).get(x.getY()) == true){
+            matrix.get(x.getX()).set(x.getY(),false);
         }else{
-            matrix.get(x.getY()).set(x.getX(),true);
+            matrix.get(x.getX()).set(x.getY(),true);
         }
 
-        return matrix.get(x.getY()).get(x.getX());
+        return matrix.get(x.getX()).get(x.getY());
         
 
     }
@@ -35,7 +35,33 @@ public class LogicsImpl implements Logics{
     @Override
     public boolean toQuit() {
         
+        boolean condition=false;;
+        condition=checkRows();
+        if(condition){
+            return true;
+        }else{
+            return condition=checkColumns();
+        }
+
+    }
+
+    private boolean checkColumns() {
+        boolean check=true;
+        for(int i=0; i<matrix.size() ; i++){
+            check=true;
+            for(int j=0; j<matrix.size();j++){
+                if(!matrix.get(j).get(i)==true){
+                    check=false;
+                }
+            }
+            if(check) return true;
+        }
+        return check;
+    }
+
+    private boolean checkRows() {
         
+        return matrix.stream().anyMatch( v -> v.stream().allMatch(b -> b==true));
 
     }
     
