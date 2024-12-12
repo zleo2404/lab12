@@ -3,8 +3,6 @@ package it.unibo.es3;
 import javax.swing.*;
 import java.util.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GUI extends JFrame {
     
@@ -19,6 +17,8 @@ public class GUI extends JFrame {
         
         JPanel panel = new JPanel(new GridLayout(size,size));
         this.getContentPane().add(BorderLayout.CENTER,panel);
+        
+        
         
         go.addActionListener( e -> {
 
@@ -38,6 +38,9 @@ public class GUI extends JFrame {
                 panel.add(jb);
             }
         }
+        this.getContentPane().add(BorderLayout.SOUTH,go);
+        
+
         updateMatrix();
         this.setVisible(true);
     }

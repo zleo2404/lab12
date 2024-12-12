@@ -1,7 +1,7 @@
 package it.unibo.es3;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -17,7 +17,7 @@ public class LogicsImpl implements Logics{
         matrixSize=size;
 
         for(int i=0; i < 3; i++){
-            matrix.add(new Pair<>(random.nextInt(),random.nextInt()));
+            matrix.add(new Pair<>(random.nextInt(size),random.nextInt(size)));
         }
         
     }
@@ -37,19 +37,26 @@ public class LogicsImpl implements Logics{
     }
 
     @Override
-    public void checkNeighborns() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'checkNeighborns'");
+    public boolean checkNeighborns(Pair<Integer,Integer> p1,Pair<Integer,Integer> p2) {
+        return Math.abs(p1.getX() - p2.getX())<=1 && Math.abs(p1.getY()-p2.getY())<=1;
     }
 
     @Override
     public void hit() {
        
-        for(int i=0; i< matrixSize; i++){
+        List<Pair<Integer,Integer>> tmp = new ArrayList<>();
+        for(int i=0;i<matrixSize;i++){
             for(int j=0; j<matrixSize;j++){
-                
+                Pair<Integer,Integer> pair = new Pair<Integer,Integer>(j, i);
+                if(matrix.stream().anyMatch( p -> checkNeighborns(p,pair))){
+                    tmp.add(pair);
+                }
+
             }
         }
+
+        matrix.addAll(tmp);
+        
 
     }
     
