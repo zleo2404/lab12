@@ -37,18 +37,13 @@ public class LogicsImpl implements Logics{
     }
 
     @Override
-    public boolean checkNeighborns(Pair<Integer,Integer> p1,Pair<Integer,Integer> p2) {
-        return Math.abs(p1.getX() - p2.getX())<=1 && Math.abs(p1.getY()-p2.getY())<=1;
-    }
-
-    @Override
     public void hit() {
        
         List<Pair<Integer,Integer>> tmp = new ArrayList<>();
         for(int i=0;i<matrixSize;i++){
             for(int j=0; j<matrixSize;j++){
                 Pair<Integer,Integer> pair = new Pair<Integer,Integer>(j, i);
-                if(matrix.stream().anyMatch( p -> checkNeighborns(p,pair))){
+                if(matrix.stream().anyMatch( p -> Math.abs(p.getX() - pair.getX())<=1 && Math.abs(p.getY()-pair.getY())<=1)){
                     tmp.add(pair);
                 }
 

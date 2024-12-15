@@ -16,6 +16,4 @@ public interface Logics {
 
 	Set<Pair<Integer,Integer>> positions();
 
-	boolean checkNeighborns(Pair<Integer,Integer> p1,Pair<Integer,Integer> p2);
-
 }

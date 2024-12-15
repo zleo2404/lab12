@@ -13,17 +13,16 @@ public class GUI extends JFrame {
     public GUI(int size) {
         this.logics = new LogicsImpl(size);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(100*size, 100*size);
+        this.setSize(70*size, 50*size);
         
         JPanel panel = new JPanel(new GridLayout(size,size));
         this.getContentPane().add(BorderLayout.CENTER,panel);
-        
-        
-        
+          
         go.addActionListener( e -> {
 
             logics.hit();
             updateMatrix();
+
             if(logics.toQuit()){
                 System.exit(1);
             }
@@ -38,9 +37,8 @@ public class GUI extends JFrame {
                 panel.add(jb);
             }
         }
-        this.getContentPane().add(BorderLayout.SOUTH,go);
-        
 
+        this.getContentPane().add(BorderLayout.SOUTH,go);
         updateMatrix();
         this.setVisible(true);
     }
